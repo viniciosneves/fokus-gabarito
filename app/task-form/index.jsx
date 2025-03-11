@@ -2,8 +2,13 @@ import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { IconSave } from "../../components/Icons"
 import { TextInput } from "react-native-gesture-handler";
 import { Heading } from "../../components/Heading";
+import { useTaskContext } from "../../context/useTaskContext";
 
 export default function TodoForm() {
+
+    const { addTask } = useTaskContext()
+
+    // agora precisamos salvar essa task!
 
     return (
         <SafeAreaView
