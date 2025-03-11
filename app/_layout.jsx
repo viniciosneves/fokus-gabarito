@@ -1,5 +1,7 @@
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function Layout() {
   return (
@@ -36,7 +38,16 @@ export default function Layout() {
           name="task-form/index"
           options={{
             drawerItemStyle: { display: "none" },
-            title: ""
+            title: "",
+            headerLeft: () => (
+              <Ionicons
+                name="arrow-back"
+                size={24}
+                color="#FFFFFF"
+                style={{ marginLeft: 16 }}
+                onPress={() => router.replace('tasks')}
+              />
+            ),
           }}
         />
       </Drawer>
