@@ -3,12 +3,22 @@ import { IconSave } from "../../components/Icons"
 import { TextInput } from "react-native-gesture-handler";
 import { Heading } from "../../components/Heading";
 import { useTaskContext } from "../../context/useTaskContext";
+import { useState } from "react";
+import { router } from "expo-router";
 
 export default function TodoForm() {
 
     const { addTask } = useTaskContext()
+    const [taskDescription, setTaskDescription] = useState()
 
-    // agora precisamos salvar essa task!
+    const submitTask = () => {
+        if (!taskDescription) {
+            return
+        }
+        addTask(taskDescription)
+        setTaskDescription('')
+        router.navigate('/tasks')
+    }
 
     return (
         <KeyboardAvoidingView
@@ -30,10 +40,11 @@ export default function TodoForm() {
                                 placeholderTextColor="#514f4f"
                                 numberOfLines={10}
                                 multiline={true}
+                                onChangeText={setTaskDescription}
                             />
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Pressable style={styles.button}>
+                            <Pressable style={styles.button} onPress={submitTask}>
                                 <IconSave />
                                 <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Salvar</Text>
                             </Pressable>

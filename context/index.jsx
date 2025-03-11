@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { nanoid } from 'nanoid'
+import { customAlphabet } from 'nanoid/non-secure'; 
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10); 
 
 export const TasksContext = createContext()
 
@@ -8,7 +9,7 @@ export const useTasks = () => useContext(TasksContext)
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([])
 
-  const addTask = () => {
+  const addTask = (description) => {
     const newTask = {
       id: nanoid(),
       description,
