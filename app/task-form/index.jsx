@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { IconSave } from "../../components/Icons"
 import { TextInput } from "react-native-gesture-handler";
 import { Heading } from "../../components/Heading";
@@ -11,42 +11,50 @@ export default function TodoForm() {
     // agora precisamos salvar essa task!
 
     return (
-        <SafeAreaView
+        <KeyboardAvoidingView
             style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-            <Heading text="Adicionar tarefa:" />
-            <View style={styles.actions}>
-                <Text style={styles.formHeading}>
-                    Em que que você está trabalhando?
-                </Text>
-                <View style={styles.textAreaContainer} >
-                    <TextInput
-                        style={styles.textArea}
-                        underlineColorAndroid="transparent"
-                        placeholder="Descreva aqui a sua tarefa"
-                        placeholderTextColor="#514f4f"
-                        numberOfLines={10}
-                        multiline={true}
-                    />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.inner}>
+                    <Heading text="Adicionar tarefa:" />
+                    <View style={styles.actions}>
+                        <Text style={styles.formHeading}>
+                            Em que que você está trabalhando?
+                        </Text>
+                        <View style={styles.textAreaContainer} >
+                            <TextInput
+                                style={styles.textArea}
+                                underlineColorAndroid="transparent"
+                                placeholder="Descreva aqui a sua tarefa"
+                                placeholderTextColor="#514f4f"
+                                numberOfLines={10}
+                                multiline={true}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Pressable style={styles.button}>
+                                <IconSave />
+                                <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Salvar</Text>
+                            </Pressable>
+                        </View>
+                    </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Pressable style={styles.button}>
-                        <IconSave />
-                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Salvar</Text>
-                    </Pressable>
-                </View>
-            </View>
-        </SafeAreaView>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
         backgroundColor: '#021123',
         gap: 40
+    },
+    inner: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
     },
     actions: {
         paddingVertical: 24,
