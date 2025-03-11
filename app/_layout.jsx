@@ -36,6 +36,7 @@ export default function Layout() {
           name="task-form/index"
           options={{
             drawerItemStyle: { display: "none" },
+            title: ""
           }}
         />
       </Drawer>
