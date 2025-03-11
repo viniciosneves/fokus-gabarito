@@ -1,12 +1,11 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
-export default function Tasks
-() {
+export default function Tasks () {
     return (
-        <View>
+        <SafeAreaView>
             <Text>
                 Tasks
             </Text>
-        </View>
+        </SafeAreaView>
     )
 }
