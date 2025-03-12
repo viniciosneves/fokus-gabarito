@@ -8,7 +8,7 @@ import { useTaskContext } from "../../context/useTaskContext"
 
 export default function Tasks() {
 
-    const { tasks, deleteTask } = useTaskContext()
+    const { tasks, deleteTask, toggleTaskCompleted } = useTaskContext()
 
     return (
         <View
@@ -33,6 +33,7 @@ export default function Tasks() {
                             text={item.description}
                             completed={item.completed}
                             onPressRemove={() => deleteTask(item.id)}
+                            onToggleComplete={() => toggleTaskCompleted(item.id)}
                         />
                     }
                     keyExtractor={t => t.id}

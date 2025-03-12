@@ -1,10 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { IconCheck, IconPencil, IconTrash } from "../Icons";
 
-export const Task = ({ text, onPressEdit, onPressRemove, completed = false }) => {
+export const Task = ({ text, onPressEdit, onPressRemove, onToggleComplete, completed = false }) => {
     return (
         <View style={[styles.card, completed && styles.completedCard]}>
-            <IconCheck checked={completed} />
+            <Pressable onPress={onToggleComplete}>
+                <IconCheck checked={completed} />
+            </Pressable>
             <Text style={styles.text}>
                 {text}
             </Text>
