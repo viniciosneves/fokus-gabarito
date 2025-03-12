@@ -1,4 +1,6 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { customAlphabet } from 'nanoid/non-secure';
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10);
 
@@ -8,6 +10,33 @@ export const useTasks = () => useContext(TasksContext)
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const storeData = async (value) => {
+      try {
+        await AsyncStorage.setItem('fokus-tasks', JSON.stringify(value));
+      } catch (e) {
+        // saving error
+      }
+    };
+    if (isLoaded) {
+      storeData(tasks)
+    }
+  }, [tasks])
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('fokus-tasks');
+        setTasks(value ? JSON.parse(value) : [])
+        setIsLoaded(true)
+      } catch (e) {
+        // error reading value
+      }
+    };
+    getData()
+  }, [])
 
   const addTask = (description) => {
     const newTask = {
