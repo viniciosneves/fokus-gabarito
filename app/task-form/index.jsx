@@ -41,6 +41,7 @@ export default function TodoForm() {
                                 numberOfLines={10}
                                 multiline={true}
                                 onChangeText={setTaskDescription}
+                                value={taskDescription}
                             />
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { customAlphabet } from 'nanoid/non-secure'; 
-const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10); 
+import { customAlphabet } from 'nanoid/non-secure';
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10);
 
 export const TasksContext = createContext()
 
@@ -18,11 +18,11 @@ export function TasksProvider({ children }) {
     setTasks([...tasks, newTask])
   }
 
-  const deleteTask = () => {
+  const deleteTask = (id) => {
     setTasks(tasks.filter(task => task.id !== id))
   }
 
-  const toggleTaskCompleted = () => {
+  const toggleTaskCompleted = (id) => {
     setTasks((prev) =>
       prev.map(task =>
         task.id === id ? { ...task, completed: !task.completed } : task,
