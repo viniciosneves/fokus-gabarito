@@ -34,6 +34,7 @@ export default function Tasks() {
                             completed={item.completed}
                             onPressRemove={() => deleteTask(item.id)}
                             onToggleComplete={() => toggleTaskCompleted(item.id)}
+                            onPressEdit={() => router.push(`/task/${item.id}`)}
                         />
                     }
                     keyExtractor={t => t.id}
